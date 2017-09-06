@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<title>Add user panel</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/form.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+
+	<article class="content">
+		<form th:object="${user}" method="post" th:action="@{'/user/addUser'}">
+			<input type="text" placeholder="Nazwa użytkownika" class="text" th:field="*{username}" /> <br />
+			<input type="password" placeholder="Hasło" class="text" th:field="*{password}" /> <br />
+			
+			<select th:field="*{enable}">
+                <option th:value="1" th:text="1"></option>
+                <option th:value="0" th:text="0"></option>
+            </select>
+            
+            <select th:field="*{roleID}">
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.roleName}"></option>
+            </select>
+			
+			<button class="button" type="submit">Dodaj użytkownika</button>
+		</form>
+	</article>
+</body>
+</html>

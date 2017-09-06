@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/form.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+
+	<article class="content">
+		<form method="post" enctype="multipart/form-data" th:action="@{'/xml/export'}">
+			<input type="file" class="text" name="file"/> <br />
+			
+			<input type="submit" class="button" value="Eksportuj"></input>
+		</form>
+		
+		<form method="post" enctype="multipart/form-data" th:action="@{'/xml/import'}">
+			<input type="file" class="text" name="file"/> <br />
+		
+			<input type="submit" class="button" value="Importuj"></input>
+		</form>
+	</article>
+</body>
+</html>

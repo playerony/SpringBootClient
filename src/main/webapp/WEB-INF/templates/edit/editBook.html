@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>Edit book page</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/form.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+
+	<article class="content">
+		<form th:object="${book}" method="post" th:action="@{'/book/editBook'}">
+			<input type="hidden" placeholder="ID" class="text" th:field="*{id}" /> <br />
+			
+			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+			<input type="text" placeholder="Tytył" class="text" th:field="*{title}" /> <br />
+			
+			<button type="submit" class="button">Edytuj książe</button>
+		</form>
+	</article>
+</body>
+</html>

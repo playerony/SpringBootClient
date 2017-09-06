@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Book interface</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+<link rel="stylesheet" th:href="@{/css/table.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+	
+	<!--<form method="post" th:action="@{'/book/exportXML'}">
+      	<button type="submit" class="button"> Export </button>
+ 	</form>-->
+	
+    <table class="container">
+        <th><h1>Iter Id</h1></th>
+        <th><h1>ID</h1></th>
+        <th><h1>Title</h1></th>
+        <th><h1>Opcje</h1></th>
+
+        <tr th:each="book, iter : ${books}">
+            <td th:text="${iter.index + 1}" ></td>
+            <td th:text="${book.id}" ></td>
+            <td th:text="${book.title}" ></td>
+
+            <td>
+                <form method="post" th:action="@{'/book/removeBook'}" sec:authorize="hasAnyAuthority('ADMIN')">
+                    <button type="submit" name="deleteButton" class="button" th:value="${book.id}"> Usuń </button>
+                </form>
+
+                <form method="get" th:action="@{'/book/edit'}" sec:authorize="hasAnyAuthority('ADMIN')">
+                    <button type="submit" name="editButton" class="button" th:value="${book.id}"> Edytuj </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

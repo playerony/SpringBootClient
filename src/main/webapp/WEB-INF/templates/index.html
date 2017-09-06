@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<title>Main</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+<link rel="stylesheet" th:href="@{/css/table.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+	
+	<table border="1">
+		<th>ID</th>
+		<th>Imię</th>
+		<th>Nazwisko</th>
+		<th>Wiek</th>
+		<th>Opcje</th>
+		
+		<tr th:each="book, iter : ${books}">
+			<th th:text="${iter.index + 1}" ></th>
+			<th th:text="${book.firstName}" ></th>
+			<th th:text="${book.lastName}" ></th>
+			<th th:text="${book.age}" ></th>
+			
+			<th>
+				<form method="post" th:action="@{'/book/removeBook'}">
+					<button type="submit" name="deleteButton" th:value="${iter.index}"> Usuń </button>
+				</form>
+				
+				<form method="get" th:action="@{'/book/edit'}">
+					<button type="submit" name="editButton" th:value="${iter.index}"> Edytuj </button>
+				</form>
+			</th>
+		</tr>
+	</table>
+</body>
+</html>

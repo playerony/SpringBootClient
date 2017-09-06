@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>User interface</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+<link rel="stylesheet" th:href="@{/css/table.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+	
+    <table class="container">
+        <th><h1>Iter Id</h1></th>
+        <th><h1>ID</h1></th>
+        <th><h1>Nazwa użytkownika</h1></th>
+        <th><h1>Hasło</h1></th>
+        <th><h1>Czy aktywny</h1></th>
+        <th><h1>Rola</h1></th>
+
+        <tr th:each="user, iter : ${users}">
+            <td th:text="${iter.index + 1}" ></td>
+            <td th:text="${user.id}" ></td>
+            <td th:text="${user.username}" ></td>
+            <td th:text="${user.password}" ></td>
+            <td th:text="${user.enable}" ></td>
+            <td th:text="${user.roleID}" ></td>
+        </tr>
+    </table>
+</body>
+</html>

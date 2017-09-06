@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<span th:fragment="menu">
+		<article class="article">
+			<header class="header">
+				<div class="logo">
+					Library<span class="spanText">App</span>
+				</div>
+			</header>
+
+			<menu class="nav">
+				<ol>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN', 'USER')"><a href="a" th:href="@{'/book/'}">Pokaż książki</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN')"><a href="a" th:href="@{'/book/add'}">Dodaj książke</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN', 'USER')"><a href="a" th:href="@{'/author/'}">Pokaż autorów</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN')"><a href="a" th:href="@{'/author/add'}">Dodaj autora</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN')"><a href="a" th:href="@{'/user/add'}">Dodaj user</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN', 'USER')"><a href="a" th:href="@{'/xml/'}">XML</a></li>
+					<li sec:authorize="hasAnyAuthority('SUPER_ADMIN', 'ADMIN', 'USER')"><a href="a" th:href="@{'/'}">Wyloguj</a></li>
+				</ol>
+			</menu>
+		</article>
+	</span>
+</body>
+</html>
