@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head xmlns:th="http://www.thymeleaf.org">
-<meta charset="UTF-8">
-<title>Edit author page</title>
+<meta charset="UTF-8" />
+<title>Add person</title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 <link rel="stylesheet" th:href="@{/css/form.css}" />
 <link rel="stylesheet" th:href="@{/css/menu.css}" />
@@ -12,16 +12,14 @@
 
 	<article class="content">
 		<form th:object="${author}" method="post" th:action="@{'/author/addAuthor'}">
-			<input type="hidden" placeholder="ID" class="text" th:field="*{id}" /> <br /> 
-			
 			<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
 			<input type="text" placeholder="Imię" class="text" th:field="*{firstName}" /> <br /> 
 			
 			<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
 			<input type="text" placeholder="Nazwisko" class="text" th:field="*{lastName}" /> <br />
 			
-			<input type="text" placeholder="Płeć" class="text" th:field="*{gender}" /> 
-			<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span><br />
+			<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+			<input type="text" placeholder="Płeć" class="text" th:field="*{gender}" /> <br />
 			
 			<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
 			<input type="number" placeholder="Wiek" class="text" th:field="*{age}" /> <br />
@@ -30,9 +28,9 @@
 			<input type="text" placeholder="Pesel" class="text" th:field="*{pesel}" /> <br />
 			
 			<span th:if="${#fields.hasErrors('bookID')}" th:errors="*{bookID}"></span>
-			<input type="number" placeholder="bookID" class="text" th:field="*{bookID}" /> <br /> 
+			<input type="text" placeholder="BookID" class="text" th:field="*{bookID}" /> <br />
 			
-			<button type="submit" class="button">Edytuj autora</button>
+			<button type="submit" class="button">Dodaj autora</button>
 		</form>
 	</article>
 </body>

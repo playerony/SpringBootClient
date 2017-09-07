@@ -11,7 +11,7 @@
 	<span th:include="fragments/menu :: menu"></span>
 
 	<article class="content">
-		<form th:object="${book}" method="post" th:action="@{'/book/editBook'}">
+		<form th:object="${book}" method="post" th:action="@{'/book/addBook'}">
 			<input type="hidden" placeholder="ID" class="text" th:field="*{id}" /> <br />
 			
 			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>

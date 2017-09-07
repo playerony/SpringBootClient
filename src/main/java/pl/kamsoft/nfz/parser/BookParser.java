@@ -3,6 +3,8 @@ package pl.kamsoft.nfz.parser;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.web.client.RestClientException;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,13 +20,11 @@ public class BookParser {
 			
 			return books;
 		} catch (JsonGenerationException e) {
-			e.printStackTrace();
+			throw new RestClientException("Some problems by json generation", e);
 		} catch (JsonMappingException e) {
-			e.printStackTrace();
+			throw new RestClientException("Some problems by json mapping", e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RestClientException("Other problem", e);
 		}
-		
-		return null;
 	}
 }

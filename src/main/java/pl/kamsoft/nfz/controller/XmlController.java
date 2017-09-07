@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.playerony.libraryV2.model.Author;
 import com.playerony.libraryV2.model.Book;
 
+import pl.kamsoft.nfz.utility.GetPropertyValues;
+
 @Controller
 @RequestMapping("/xml")
 public class XmlController {
+	@Autowired
+	private GetPropertyValues getPropertyValues;
 
 	@RequestMapping("/")
 	public String index() {
@@ -31,7 +36,7 @@ public class XmlController {
 	public String exportXml(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 	    Path path = Paths.get(file.getOriginalFilename());
 	    
-	    String url = "http://localhost:8080/post/export";
+	    String url = "http://" + getPropertyValues.get("server.address") + "/post/export";
 		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForObject(url, path.toString(), String.class);
@@ -43,7 +48,7 @@ public class XmlController {
 	public String importXml(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		Path path = Paths.get(file.getOriginalFilename());
 		
-		String url = "http://localhost:8080/post/import";
+		String url = "http://" + getPropertyValues.get("server.address") + "/post/import";
 		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForObject(url, path.toString(), String.class);

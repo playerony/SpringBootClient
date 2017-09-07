@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Author interface</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/menu.css}" />
+<link rel="stylesheet" th:href="@{/css/table.css}" />
+</head>
+<body>
+	<span th:include="fragments/menu :: menu"></span>
+
+	<!--<form method="post" th:action="@{'/author/exportXML'}">
+      	<button type="submit" class="button"> Export </button>
+ 	</form>-->
+
+	<table class="container">
+		<th><h1>ID</h1></th>
+		<th><h1>Imię</h1></th>
+		<th><h1>Nazwisko</h1></th>
+		<th><h1>Płeć</h1></th>
+		<th><h1>Age</h1></th>
+		<th><h1>Pesel</h1></th>
+		<th><h1>Id książki</h1></th>
+		<th><h1>Opcje</h1></th>
+		
+		<tr th:each="author, iter : ${authors}">
+			<td th:text="${iter.index + 1}"></td>
+			<td th:text="${author.firstName}"></td>
+			<td th:text="${author.lastName}"></td>
+			<td th:text="${author.gender}"></td>
+			<td th:text="${author.age}"></td>
+			<td th:text="${author.pesel}"></td>
+			<td th:text="${author.bookID}"></td>
+			
+			<td>
+				<form method="post" th:action="@{'/author/removeAuthor'}">
+					<button sec:authorize="hasAnyAuthority('ADMIN')" type="submit" name="deleteButton" class="button" th:value="${author.id}"> Usuń </button>
+				</form>
+				
+				<form method="get" th:action="@{'/author/edit'}">
+					<button sec:authorize="hasAnyAuthority('ADMIN')" type="submit" name="editButton" class="button" th:value="${author.id}"> Edytuj </button>
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
