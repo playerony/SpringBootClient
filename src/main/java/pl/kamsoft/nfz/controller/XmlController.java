@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +40,13 @@ public class XmlController {
 	    Path path = Paths.get(file.getOriginalFilename());
 	    
 	    String url = "http://" + getPropertyValues.get("server.address") + "/post/export";
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(url, path.toString(), String.class);
+		HttpEntity<MultipartFile> requestEntity = new HttpEntity<>(file, headers);
+		
+		restTemplate.postForObject(url, requestEntity, String.class);
 		
 		return "redirect:/xml/";
 	}
@@ -49,9 +56,13 @@ public class XmlController {
 		Path path = Paths.get(file.getOriginalFilename());
 		
 		String url = "http://" + getPropertyValues.get("server.address") + "/post/import";
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(url, path.toString(), String.class);
+		HttpEntity<MultipartFile> requestEntity = new HttpEntity<>(file, headers);
+		
+		restTemplate.postForObject(url, requestEntity, String.class);
 		
 		return "redirect:/xml/";
 	}

@@ -67,7 +67,6 @@ public class AuthorController {
 	@PostMapping(value = "/removeAuthor")
 	public String remove(@RequestParam(value="deleteButton") Long id) {
 		String url = "http://" + getPropertyValues.get("server.address") + "/post/deleteAuthor/";
-
 		new RestTemplate().put(url + id, id);
 		
 		return "redirect:/author/all";
